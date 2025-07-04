@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Logo from "../../assets/InterviewerAi Logo.png"
 
-const Header = () => {
+const Header = ({openModal}) => {
 const [expanded, setExpanded] = useState(false);
   return (
     <div>
@@ -40,9 +40,10 @@ const [expanded, setExpanded] = useState(false);
 
 
             <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
-              <a href="#" className="text-base font-medium text-gray-900 hover:text-opacity-50">Login</a>
+              <a onClick={()=>openModal("login",true)}
+               className="text-base font-medium text-gray-900 hover:text-opacity-50">Login</a>
               <a
-                href="#"
+                onClick={()=>openModal("signup",true)}
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
               >
                 Sign up
@@ -60,9 +61,9 @@ const [expanded, setExpanded] = useState(false);
             <nav > 
               <div className="px-1 py-8">
                 <div className="grid grid-cols-2 gap-x-7">
-                  <a href="#" className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600 transition "> Login</a>
+                  <a onClick={()=>openModal("login",true)} className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600 transition "> Login</a>
                   <a
-                    href="#"
+                    onClick={()=>openModal("signup",true)}
                     className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-gray-900 bg-white border-gray-900 border-2 rounded-xl hover:bg-gray-200"
                   >
                     Sign up
