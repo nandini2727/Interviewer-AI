@@ -6,11 +6,11 @@ const [expanded, setExpanded] = useState(false);
   return (
     <div>
       <div className="overflow-x-hidden bg-gray-50">
-      <header className="py-4 md:py-6">
+      <header className="py-4 md:py-6 ">
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex-shrink-0">
-              <a href="#" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
+              <a href="#" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 cursor-pointer">
                 <img
                   className="w-auto h-8"
                   src={Logo}
@@ -41,10 +41,10 @@ const [expanded, setExpanded] = useState(false);
 
             <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
               <a onClick={()=>openModal("login",true)}
-               className="text-base font-medium text-gray-900 hover:text-opacity-50">Login</a>
+               className="text-base font-medium text-gray-900 hover:text-opacity-50 cursor-pointer">Login</a>
               <a
                 onClick={()=>openModal("signup",true)}
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600 cursor-pointer"
               >
                 Sign up
               </a>
@@ -61,10 +61,10 @@ const [expanded, setExpanded] = useState(false);
             <nav > 
               <div className="px-1 py-8">
                 <div className="grid grid-cols-2 gap-x-7">
-                  <a onClick={()=>openModal("login",true)} className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600 transition "> Login</a>
+                  <a onClick={()=>openModal("login",true)} className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-white bg-gray-900 rounded-xl hover:bg-gray-600 transition cursor-pointer"> Login</a>
                   <a
                     onClick={()=>openModal("signup",true)}
-                    className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-gray-900 bg-white border-gray-900 border-2 rounded-xl hover:bg-gray-200"
+                    className="inline-flex items-center justify-center px-4 py-3 text-base font-bold text-gray-900 bg-white border-gray-900 border-2 rounded-xl hover:bg-gray-200 cursor-pointer"
                   >
                     Sign up
                   </a>

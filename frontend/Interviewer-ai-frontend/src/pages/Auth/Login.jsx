@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Inputs/Input'
-const Login = () => {
+const Login = ({setCurrentPage}) => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [errorMsg,setErrorMsg]=useState("")
@@ -11,8 +11,8 @@ const Login = () => {
     e.preventDefault()
   }
   return (
-    <div className=' w-[300px] md:w-[400px] h-[350px] p-2'>
-      <h2 className='text-3xl font-semibold text-center text-gray-900 mb-2'>Welcome Back</h2>
+    <div className=' w-[300px] md:w-[400px] p-2'>
+      <h2 className='text-2xl md:text-3xl font-semibold text-center text-gray-900 mb-2'>Welcome Back</h2>
       <p className='text-gray-600 mb-6 text-center'>Please enter your details to login</p>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <Input
@@ -33,6 +33,7 @@ const Login = () => {
         >
           Login
         </button>
+        <p className='my-2'>Don't have an account? <span className='text-purple-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("signup")}>Signup</span></p>
       </form>
     </div>
   )
