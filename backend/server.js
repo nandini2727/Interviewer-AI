@@ -28,8 +28,8 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 
 //ROUTES
 app.use("/api/auth",authRoutes)
-// app.use("/api/sessions",sessionRoutes)
-// app.use("/api/question",questionRoutes)
+app.use("/api/session",sessionRoutes)
+app.use("/api/question",questionRoutes)
 
 
  //START SERVER
