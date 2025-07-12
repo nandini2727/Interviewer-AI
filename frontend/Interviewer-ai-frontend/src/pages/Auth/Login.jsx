@@ -9,6 +9,22 @@ const Login = ({setCurrentPage}) => {
   const navigate =useNavigate();
   const handleSubmit=async(e)=>{
     e.preventDefault()
+    if(email === "")
+      setErrorMsg("Please enter email")
+    if(password === "")
+      setErrorMsg("Please enter password")
+    setErrorMsg("")
+    try {
+      
+    } catch (error) {
+      if(error.response && error.response.data.message){
+        setErrorMsg(error.response.data.message)
+      }
+      else{
+        setErrorMsg("Something went wrong.Please try again later")
+      }
+    }
+    
   }
   return (
     <div className=' w-[300px] md:w-[400px] p-2'>
@@ -27,6 +43,7 @@ const Login = ({setCurrentPage}) => {
           label="Password"
           placeholder="Min 8 characters"
           type="password"/>
+          <p className='my-2 text-red-600'>{errorMsg}</p>
         <button
           type="submit"
           className="mt-4 w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"

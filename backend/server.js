@@ -6,6 +6,8 @@ const connectDb =require("./config/db")
 const authRoutes = require("./routes/authRoutes")
 const questionRoutes = require("./routes/questionRoutes")
 const sessionRoutes = require("./routes/sessionRoutes")
+const { requireAuth } = require("./middlewares/authMiddleware")
+const { generateInterviewQuestions, generateConceptExplanation } = require("./controllers/aiControllers")
 
 const app=express()
 
@@ -30,6 +32,9 @@ app.use("/uploads",express.static(path.join(__dirname,"uploads")))
 app.use("/api/auth",authRoutes)
 app.use("/api/session",sessionRoutes)
 app.use("/api/question",questionRoutes)
+
+app.use("/api/ai/generate-questions",requireAuth,generateInterviewQuestions)
+app.use("/api/ai/generate-explanations",requireAuth,generateConceptExplanation)
 
 
  //START SERVER
