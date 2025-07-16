@@ -14,8 +14,8 @@ const app=express()
 //MIDDLEWARE TO SET UP CORS
 
 app.use(cors({
-    origin:"*",
-    allowedHeaders:["Content-Type","Authorisation"],
+    origin:"http://localhost:5173",
+    allowedHeaders:["Content-Type","Authorization "],
     methods:["GET","PUT","POST","DELETE"]
 }))
 

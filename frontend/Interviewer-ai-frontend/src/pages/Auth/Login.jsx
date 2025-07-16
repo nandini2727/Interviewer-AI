@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Inputs/Input'
+import {isEmail,isStrongPassword} from "validator"
+import axiosInstance from '../../utils/axiosInstance'
+import { API_PATHS } from '../../utils/apiPaths'
+
 const Login = ({setCurrentPage}) => {
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
@@ -9,21 +13,39 @@ const Login = ({setCurrentPage}) => {
   const navigate =useNavigate();
   const handleSubmit=async(e)=>{
     e.preventDefault()
+    
     if(email === "")
       setErrorMsg("Please enter email")
-    if(password === "")
+    else if(password === "")
       setErrorMsg("Please enter password")
-    setErrorMsg("")
-    try {
-      
-    } catch (error) {
-      if(error.response && error.response.data.message){
-        setErrorMsg(error.response.data.message)
-      }
-      else{
-        setErrorMsg("Something went wrong.Please try again later")
-      }
+    else if(!isEmail(email))
+        setErrorMsg("Please enter valid email")
+    
+    else if(!isStrongPassword(password))
+      setErrorMsg("Please enter password with min 8 letters, 1 Uppercase , i lower case and  1 special character")
+    else{
+        setErrorMsg("")
+    
+        try {
+          const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
+            email,password
+          })
+          const {token} = response.data
+          if(token){
+            localStorage.setItem("token",token)
+            navigate("/dashboard")
+          }
+          
+        } catch (error) {
+          if(error.response && error.response.data.message){
+            setErrorMsg(error.response.data.message)
+          }
+          else{
+            setErrorMsg("Something went wrong.Please try again later")
+          }
+        }
     }
+     
     
   }
   return (
@@ -46,7 +68,7 @@ const Login = ({setCurrentPage}) => {
           <p className='my-2 text-red-600'>{errorMsg}</p>
         <button
           type="submit"
-          className="mt-4 w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"
+          className=" w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"
         >
           Login
         </button>
