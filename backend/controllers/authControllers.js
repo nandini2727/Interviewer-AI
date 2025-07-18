@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs")
 
 
 const createToken =(userId)=>{
+    
     return jwt.sign({id:userId},process.env.JWT_SECRET,{expiresIn:"1d"})
 }
 const loginUser =async(req,res)=>{
@@ -12,14 +13,16 @@ const loginUser =async(req,res)=>{
         const user =await User.findOne({email})
         if(user){
             const auth=await bcrypt.compare(password,user.password);
-            if(auth)
+            if(auth){
                 res.status(200).json({
                 id:user._id,
                 fullName:user.fullName,
                 email:user.email,
                 profilePhotoUrluser:user.profilePhotoUrl,
                 token:createToken(user._id)
-                })  
+                }) 
+                
+            } 
             else{
                 res.status(400).json({message:"Invalid Password"})
             }
@@ -51,7 +54,8 @@ const uploadImage = (req,res)=>{
 
 const getProfile = async(req,res)=>{
     try{
-        const user= await User.findById(req.user.id).select("-password")
+
+        const user= await User.findById(req.user._id).select("-password")
         if(!user)
             res.status(400).json({message:"User not found"})
         res.status(200).json(user)

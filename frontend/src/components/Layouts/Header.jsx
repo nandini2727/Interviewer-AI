@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Logo from "../../assets/InterviewerAi Logo.png"
+import { UserContext } from '../../context/useContext';
+import ProfileInfoCard from '../Cards/ProfileInfoCard';
 
 const Header = ({openModal}) => {
 const [expanded, setExpanded] = useState(false);
+const {user} = useContext(UserContext)
   return (
     <div>
       <div className="overflow-x-hidden bg-gray-50">
@@ -38,8 +41,8 @@ const [expanded, setExpanded] = useState(false);
               </button>
             </div>
 
-
-            <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
+            { user ? <ProfileInfoCard/> :
+              <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-10">
               <a onClick={()=>openModal("login",true)}
                className="text-base font-medium text-gray-900 hover:text-opacity-50 cursor-pointer">Login</a>
               <a
@@ -49,6 +52,8 @@ const [expanded, setExpanded] = useState(false);
                 Sign up
               </a>
             </div>
+            }
+            
           </div>
 
           {/* Mobile Nav */}

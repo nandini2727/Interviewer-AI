@@ -10,6 +10,29 @@ const Signup = ({setCurrentPage}) => {
 
   const handleSubmit =(e)=>{
     e.preventDefault();
+    if(fullName === "")
+      setErrorMsg("Please enter full name")
+    else if(email === "")
+      setErrorMsg("Please enter email")
+    else if(password === "")
+      setErrorMsg("Please enter password")
+    else if(!isEmail(email))
+        setErrorMsg("Please enter valid email")
+    
+    else if(!isStrongPassword(password))
+      setErrorMsg("Please enter password with at least 8 letters, 1 uppercase , 1 lower case and  1 special character")
+    else{
+        setErrorMsg("")
+        try {
+          
+        } catch (error) {
+          if(error.response && error.response.data.message)
+            setErrorMsg(error.response.data.message)
+          else
+            setErrorMsg("Something went wrong. Please try again later.")
+        }
+    }
+
   }
   return (
     <div>
