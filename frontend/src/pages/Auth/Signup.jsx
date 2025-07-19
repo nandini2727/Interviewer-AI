@@ -1,15 +1,26 @@
 import { useState } from 'react'
 import Input from '../../components/Inputs/Input'
 import ProfilePhotoPlaceholder from '../../components/Inputs/ProfilePhotoPlaceholder'
+import { useContext } from 'react'
+import { UserContext } from '../../context/useContext'
+import axiosInstance from '../../utils/axiosInstance'
+import { API_PATHS } from '../../utils/apiPaths'
+import { useNavigate } from 'react-router-dom'
+import uploadImage from '../../utils/uploadImage'
+import {isEmail ,isStrongPassword} from "validator"
 
 const Signup = ({setCurrentPage}) => {
   const [profilePhoto,setProfilePhoto]=useState(null)
   const [email,setEmail]=useState("")
   const [password,setPassword]=useState("")
   const [fullName,setFullName]=useState("")
+  const [errormsg,setErrorMsg]=useState("")
+  const navigate = useNavigate()
 
-  const handleSubmit =(e)=>{
+  const {updateUser} = useContext(UserContext)
+  const handleSubmit = async (e)=>{
     e.preventDefault();
+    let profilePhotoUrl;
     if(fullName === "")
       setErrorMsg("Please enter full name")
     else if(email === "")
@@ -24,10 +35,29 @@ const Signup = ({setCurrentPage}) => {
     else{
         setErrorMsg("")
         try {
+          if(profilePhoto){
+            const imgUploadRes =await uploadImage(profilePhoto)
+            profilePhotoUrl = imgUploadRes.imageUrl || ""
+          }
+          const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
+            profilePhotoUrl,
+            fullName,
+            email,
+            password
+          })
+          const {token} = response.data
+          if(token){
+            localStorage.setItem("token",token)
+            updateUser(response.data)
+            navigate("/dashboard")
+          }
           
+
         } catch (error) {
-          if(error.response && error.response.data.message)
+          if(error.response && error.response.data.message){
+            console.log(error.response.data.error)
             setErrorMsg(error.response.data.message)
+          }
           else
             setErrorMsg("Something went wrong. Please try again later.")
         }
@@ -59,6 +89,7 @@ const Signup = ({setCurrentPage}) => {
             label="Password"
             placeholder="Min 8 characters"
             type="password"/>
+             <p className='my-2 text-red-600'>{errormsg}</p>
           <button
             type="submit"
             className="mt-4 w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"
