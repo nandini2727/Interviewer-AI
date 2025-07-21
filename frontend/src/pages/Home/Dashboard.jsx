@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../components/Layouts/DashboardLayout'
 import { CARD_BG } from '../../utils/data'
 import toast from "react-hot-toast"
+import Modal from "react-modal"
 import { LuPlus } from 'react-icons/lu'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../../utils/axiosInstance'
 import { API_PATHS } from '../../utils/apiPaths'
 import moment from "moment"
 import SummaryCard from '../../components/Cards/SummaryCard'
+import { RxCross1 } from 'react-icons/rx'
+import CreateSessionForm from './CreateSessionForm'
 
 const DashBoard = () => {
   const navigate = useNavigate()
@@ -61,6 +64,30 @@ const DashBoard = () => {
         <LuPlus className="w-5 h-5 md:w-7 md:h-7" />
       </button>
 
+        <Modal
+          isOpen ={openCreateModal}
+          // onRequestClose={()=>setOpenCreateModal(false)}
+          style={{
+            overlay:{
+              zIndex:100,
+              backgroundColor:"rgba(0,0,0,0.75)"
+            },
+            content:{
+              position:'absolute',
+              top: '45%',
+              left: '50%',
+              transform:'translate(-50%,-50%)',
+              borderRadius:20,
+              height:'fit-content',
+              width:'fit-content'
+            }
+          }}
+           >
+            <div className='relative'>
+              <RxCross1 size={20} className='absolute top-2 right-2 cursor-pointer text-pink-600 hover:text-red-600' onClick={()=>setOpenCreateModal(false)}/>
+              <CreateSessionForm/>
+            </div>
+            </Modal>
       </DashboardLayout>
     </div>
   )

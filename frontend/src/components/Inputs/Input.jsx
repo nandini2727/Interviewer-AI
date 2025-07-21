@@ -10,13 +10,13 @@ const Input=( {value,onChange,label,placeholder,type})=>{
     return(
         <div>
             <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">{label}</label>
+                <label className="block text-[15px] font-medium text-gray-700">{label}</label>
                 <div className="relative">
                     <input placeholder={placeholder}
                         value={value}
                         onChange={(e)=> onChange(e)}
                         type={type==="password" ? (showPassword? "text" : "password" ):type}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-colors duration-200"
+                        className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-colors duration-200"
                         />
                         {type ==="password" && 
                         <>
