@@ -13,7 +13,7 @@ const {user} = useContext(UserContext)
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex-shrink-0">
-              <a href="#" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 cursor-pointer">
+              <a href="#" className="flex rounded outline-none  cursor-pointer">
                 <img
                   className="w-auto h-8"
                   src={Logo}
@@ -29,7 +29,7 @@ const {user} = useContext(UserContext)
                 onClick={() => setExpanded(!expanded)}
                 aria-expanded={expanded}
               >
-                {!expanded ? (
+                { !user &&( !expanded ? (
                   <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
@@ -37,7 +37,7 @@ const {user} = useContext(UserContext)
                   <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                )}
+                ))}
               </button>
             </div>
 

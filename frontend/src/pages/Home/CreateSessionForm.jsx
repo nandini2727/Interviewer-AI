@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
+import { useState } from 'react'
 import Input from '../../components/Inputs/Input'
+import {useNavigate} from "react-router-dom"
 import {ClipLoader} from "react-spinners"
-import { UserContext } from '../../context/useContext'
+import axiosInstance from '../../utils/axiosInstance'
+import { API_PATHS } from '../../utils/apiPaths'
 
 const CreateSessionForm = () => {
     const [role,setRole]= useState("")
@@ -9,9 +11,54 @@ const CreateSessionForm = () => {
     const [topicsToFocus,setTopicsToFocus]= useState("")
     const [description,setDescription]= useState("")
     const [errormsg,setErrorMsg] = useState("")
+    const [isLoading,setIsLoading]= useState(false)
 
-    const {isLoading} =useContext(UserContext)
-    const handleSubmit = ()=>{
+    const navigate = useNavigate()
+    const handleSubmit = async (e)=>{
+      e.preventDefault()
+      
+      if(!role||!experience||!topicsToFocus){
+        setErrorMsg("Please Fill all the required fields")
+        return
+      }
+      setErrorMsg("")
+      setIsLoading(true)
+
+      try {
+
+        const aiResponse = await axiosInstance.post(API_PATHS.AI.GENERATE_QUESTIONS,
+          { role,
+            experience,
+            topicsToFocus,
+            numberOfQuestions:10
+          })
+        
+        const generatedQuestions= aiResponse.data 
+        const response = await axiosInstance.post(API_PATHS.SESSION.CREATE,
+          { role,
+            experienceLevel : experience,
+            topicsToFocus,
+            description ,
+            questions:generatedQuestions
+          })
+          if(response.data?.session?._id){
+            navigate(`/interview-prep/${response.data?.session?._id}`)
+          }
+          
+
+      } catch (error) {
+        if(error.response && error.response.data.message){
+          setErrorMsg(error.response.data.message)
+          
+        }
+        else{
+          setErrorMsg("Something went wrong. Please try later.")
+          
+        }
+      }finally{
+        setIsLoading(false)
+      }
+      
     }
 
   return (

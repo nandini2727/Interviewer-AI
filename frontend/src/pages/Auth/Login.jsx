@@ -68,7 +68,7 @@ const Login = ({setCurrentPage}) => {
           label="Password"
           placeholder="Min 8 characters"
           type="password"/>
-          <p className='my-2 text-red-600'>{errorMsg}</p>
+          {errorMsg && <p className='my-2 text-red-600'>{errormsg}</p>}
         <button
           type="submit"
           className=" w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"
