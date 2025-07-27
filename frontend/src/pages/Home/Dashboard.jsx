@@ -11,6 +11,7 @@ import moment from "moment"
 import SummaryCard from '../../components/Cards/SummaryCard'
 import { RxCross1 } from 'react-icons/rx'
 import CreateSessionForm from './CreateSessionForm'
+import DeleteAlertContent from './DeleteAlertContent'
 
 const DashBoard = () => {
   const navigate = useNavigate()
@@ -29,7 +30,15 @@ const DashBoard = () => {
     }
   }
   const deleteSession = async (sessionData)=>{
+    try {
+      await axiosInstance.delete(API_PATHS.SESSION.DELETE(sessionData?._id))
+      toast.success("Session deleted successfully!",{duration:2000})
+      setOpenDeleteModal({open:false,data : null})
+      fetchAllSessions()
 
+    } catch (error) {
+      console.error("Error deleting session data:",error)
+    }
   }
 
   useEffect(()=>{
@@ -86,6 +95,37 @@ const DashBoard = () => {
             <div className='relative'>
               <RxCross1 size={20} className='absolute top-2 right-2 cursor-pointer text-pink-600 hover:text-red-600' onClick={()=>setOpenCreateModal(false)}/>
               <CreateSessionForm/>
+            </div>
+            </Modal>
+            
+            <Modal
+          isOpen ={openDeleteModal.open}
+          
+
+          style={{
+             overlay:{
+              zIndex:100,
+              backgroundColor:"rgba(0,0,0,0.35)"
+            },
+            content:{
+              position:'absolute',
+              padding:10,
+              top: '45%',
+              left: '50%',
+              transform:'translate(-50%,-50%)',
+              borderRadius:20,
+              height:'fit-content',
+              width:'fit-content'
+            }
+          }}
+           >
+            <div className='relative'>
+              <RxCross1 size={20} className='absolute top-2 right-2 cursor-pointer text-pink-600 hover:text-red-600' onClick={()=>setOpenDeleteModal({open:false,data:null})}/>
+              <DeleteAlertContent
+                title="Delete Alert"
+                content="Are you sure you want to delete this session?"
+                onDelete={()=>deleteSession(openDeleteModal.data)}
+                />
             </div>
             </Modal>
       </DashboardLayout>

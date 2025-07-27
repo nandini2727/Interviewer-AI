@@ -34,7 +34,7 @@ app.use("/api/session",sessionRoutes)
 app.use("/api/question",questionRoutes)
 
 app.use("/api/ai/generate-questions",requireAuth,generateInterviewQuestions)
-app.use("/api/ai/generate-explanations",requireAuth,generateConceptExplanation)
+app.use("/api/ai/generate-explanation",requireAuth,generateConceptExplanation)
 
 
  //START SERVER
