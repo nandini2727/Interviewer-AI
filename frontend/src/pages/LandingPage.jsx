@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Header from "../components/Layouts/Header";
 import Modal from 'react-modal';
 import Login from "./Auth/Login"
 import SignUp from "./Auth/Signup"
 import { RxCross1 } from "react-icons/rx";
+import { UserContext } from "../context/useContext";
+import { Link } from "react-router-dom";
+import HERO_IMG from "../assets/DashBoardPage.png"
 
 const LandingPage = () => {
+  const {user} = useContext(UserContext)
   const [openAuthModal,setOpenAuthModal]=useState(false);
   const [currentPage,setCurrentPage]=useState("")
 
@@ -30,27 +34,35 @@ const LandingPage = () => {
             </p>
 
             <div className="px-8 sm:flex sm:justify-center sm:space-x-5 mt-9">
-              <a
-                href="#"
+              {user?
+              <Link
+                to="/dashboard"
                 className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white bg-gray-900 sm:w-auto rounded-xl hover:bg-gray-600"
               >
+               Go to Dashboard 
+              </Link>
+              :
+              <button
+                onClick={()=>handleOpenAuthModal("signup",true)}
+                className="inline-flex items-center cursor-pointer justify-center w-full px-8 py-3 text-lg font-bold text-white bg-gray-900 sm:w-auto rounded-xl hover:bg-gray-600"
+              >
                 Get Started
-              </a>
-              
+              </button>
+              }
             </div>
 
             <p className="mt-8 text-base text-gray-500">Start preparing smarter with AI — completely free.</p>
           </div>
         </div>
 
-        <div className="pb-12 bg-white">
+        <div className="pb-12  mt-20 bg-white">
           <div className="relative">
             <div className="absolute inset-0 h-2/3 bg-gray-50"></div>
             <div className="relative mx-auto">
               <div className="lg:max-w-6xl lg:mx-auto">
                 <img
-                  className="transform scale-110"
-                  src="https://cdn.rareblocks.xyz/collection/clarity/images/hero/2/illustration.png"
+                  className="transform shadow-xl rounded-lg  scale-100"
+                  src={HERO_IMG}
                   alt="Hero Illustration"
                 />
               </div>

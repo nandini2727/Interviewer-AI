@@ -1,11 +1,13 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Logo from "../../assets/InterviewerAi Logo.png"
 import { UserContext } from '../../context/useContext';
 import ProfileInfoCard from '../Cards/ProfileInfoCard';
+import { Link } from 'react-router-dom';
 
 const Header = ({openModal}) => {
 const [expanded, setExpanded] = useState(false);
 const {user} = useContext(UserContext)
+// useEffect(()=>{<ProfileInfoCard/>},[user])
   return (
     <div>
       <div className="overflow-x-hidden bg-gray-50">
@@ -13,13 +15,13 @@ const {user} = useContext(UserContext)
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex-shrink-0">
-              <a href="#" className="flex rounded outline-none  cursor-pointer">
+            <Link to='/' className="flex rounded outline-none  cursor-pointer">
                 <img
                   className="w-auto h-8"
                   src={Logo}
                   alt="Logo"
                 />
-              </a>
+              </Link>
             </div>
 
             <div className="flex lg:hidden">

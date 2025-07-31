@@ -122,11 +122,11 @@ function CodeBlock({code,language}){
             </div>
             <button 
                 onClick={copyCode}
-                className='text-gray-500 hover:text-gray-700 focus:outline-none relative group'
+                className='text-gray-500 cursor-pointer hover:text-gray-700 focus:outline-none relative group'
                 aria-label='Copy code'
             >
                 {copied?(
-                    <LuCheck size={16} className='text-green-600'/>):(
+                    <LuCheck size={16} className='text-green-600 cursor-auto'/>):(
                     <LuCopy size={16}/>
                 )}
                 {copied && (

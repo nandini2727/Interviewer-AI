@@ -48,7 +48,7 @@ const QuestionCard = ({
     >
       {/* Pin / Unpin */}
       <button
-        className={`text-purple-700 hover:text-purple-900 transition ${isPinned ? "flex":""}`}
+        className={`text-purple-700 hover:text-purple-900 cursor-pointer transition ${isPinned ? "flex":""}`}
         onClick={onTogglePin}
       >
         {isPinned ? <LuPin /> : <LuPinOff />}
@@ -60,7 +60,7 @@ const QuestionCard = ({
           setIsExpanded(true)
           onLearnMore()
         }}
-        className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 text-sm text-gray-800 rounded-lg hover:shadow-md transition"
+        className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 text-sm text-gray-800 rounded-lg hover:shadow-md transition"
       >
         <LuSparkles className="text-blue-500" />
         <span className="hidden md:inline font-medium">Learn More</span>
@@ -69,7 +69,7 @@ const QuestionCard = ({
 
     {/* Chevron Expand */}
     <button
-      className="ml-auto md:ml-0 text-gray-600"
+      className="ml-auto md:ml-0 cursor-pointer text-gray-600"
       onClick={toggleExpanded}
     >
       <LuChevronDown

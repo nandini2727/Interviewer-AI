@@ -1,5 +1,6 @@
 import React from 'react'
 import {LuX} from 'react-icons/lu'
+import Skeleton from 'react-loading-skeleton'
 
 const Drawer = ({isOpen,onClose,title,children}) => {
   return (
@@ -19,7 +20,7 @@ const Drawer = ({isOpen,onClose,title,children}) => {
         <button 
             type="button"
             onClick={onClose}
-            className='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center'
+            className='text-gray-400 bg-transparent cursor-pointer hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex items-center justify-center'
         >
             <LuX className='text-lg'/>
         </button>

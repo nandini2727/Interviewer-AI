@@ -13,6 +13,7 @@ import AiContentResponse from './components/AiContentResponse'
 import Drawer from '../../components/Drawer'
 import { ClipLoader } from 'react-spinners'
 import AiResponsePreview from './components/AiResponsePreview'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const InterviewPrep = () => {
   const {id :sessionId}  = useParams()
@@ -165,7 +166,14 @@ const InterviewPrep = () => {
                         </motion.div>
                     )
 
-                  })}
+                  })|| (
+                    <div className='flex flex-col gap-3 '>
+                      <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
+                        <Skeleton containerClassName="flex-1" height={50} count={6} style={{"line-height":3}} width="w-3/4"/>
+                        
+                      </SkeletonTheme>
+                    </div>  
+                  )}
                 </AnimatePresence>
             </div>
           </div>
@@ -181,7 +189,19 @@ const InterviewPrep = () => {
                 <LuCircleAlert className='mt-1'/> {errorMsg}
               </p>
             )}
-            {isLoading && <ClipLoader/>}
+            {isLoading && (
+            <div className='flex flex-col gap-3 '>
+              <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
+                <Skeleton containerClassName="flex-1" height={22} width={"50%"}/>
+                <Skeleton containerClassName="flex-1" height={18} count={8}/>
+                <Skeleton containerClassName="flex-1" height={18} width={"35%"}/>
+                <Skeleton containerClassName="flex-1" height={48} />
+                <Skeleton containerClassName="flex-1" height={18} count={9}/>
+                <Skeleton containerClassName="flex-1" height={18} width={"35%"}/>
+                <Skeleton containerClassName="flex-1" height={48} />
+              </SkeletonTheme>
+            </div>  
+            )}
             {!isLoading && explanation && (
               <AiResponsePreview content = {explanation[0]?.explanation}/>
             )}

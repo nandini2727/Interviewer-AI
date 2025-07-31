@@ -22,9 +22,6 @@ const Login = ({setCurrentPage}) => {
       setErrorMsg("Please enter password")
     else if(!isEmail(email))
         setErrorMsg("Please enter valid email")
-    
-    else if(!isStrongPassword(password))
-      setErrorMsg("Please enter password with min 8 letters, 1 Uppercase , i lower case and  1 special character")
     else{
         setErrorMsg("")
     
@@ -68,7 +65,7 @@ const Login = ({setCurrentPage}) => {
           label="Password"
           placeholder="Min 8 characters"
           type="password"/>
-          {errorMsg && <p className='my-2 text-red-600'>{errormsg}</p>}
+          {errorMsg && <p className='my-2 text-red-600'>{errorMsg}</p>}
         <button
           type="submit"
           className=" w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"

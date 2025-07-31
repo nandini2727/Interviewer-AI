@@ -1,5 +1,5 @@
 import React from 'react'
-import { RxCross1 } from 'react-icons/rx'
+import { GoTrash } from "react-icons/go";
 import { getInitials } from '../../utils/helper'
 
 const SummaryCard = ({
@@ -15,7 +15,7 @@ const SummaryCard = ({
 }) => {
   return (
     <div
-    className="w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
+    className="w-full max-w-md bg-white rounded-2xl cursor-pointer hover:-translate-1 ease-in-out duration-250 hover:shadow-xl shadow-lg overflow-hidden border border-gray-200"
     onClick={onSelect}
     >
     {/* Top Section with Initials and Delete */}
@@ -33,13 +33,13 @@ const SummaryCard = ({
         </div>
     </div>
     <button
-        className="text-pink-600 hover:text-red-500"
+        className="text-pink-600 cursor-pointer p-2 rounded-md hover:bg-pink-100 hover:text-red-500"
         onClick={(e) => {
         e.stopPropagation()
         onDelete()
         }}
     >
-        <RxCross1 size={18} />
+        <GoTrash size={18} />
     </button>
     </div>
 

@@ -67,7 +67,7 @@ const DashBoard = () => {
 
       <button
         onClick={() => setOpenCreateModal(true)}
-        className="fixed bottom-12 right-9 z-50 bg-blue-600 text-white p-4 md:p-6 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-200"
+        className="fixed bottom-12 cursor-pointer right-9 z-50 bg-blue-600 text-white p-4 md:p-6 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-200"
         aria-label="Add Session"
       >
         <LuPlus className="w-5 h-5 md:w-7 md:h-7" />
@@ -100,7 +100,7 @@ const DashBoard = () => {
             
             <Modal
           isOpen ={openDeleteModal.open}
-          
+          onRequestClose={()=>setOpenDeleteModal({open:false,data:null})}
 
           style={{
              overlay:{
