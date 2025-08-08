@@ -61,7 +61,7 @@ const ProfilePhotoPlaceholder = ({ image, setImage, preview, setPreview }) => {
 
       {!image ? (
        
-        <div className="relative w-32 h-32 rounded-full border-2 border-dashed border-blue-900 flex items-center justify-center text-blue-900">
+        <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full border-2 border-dashed border-blue-900 flex items-center justify-center text-blue-900">
           <LuUserRound size={48} />
           <button
             type="button"

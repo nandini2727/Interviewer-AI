@@ -18,6 +18,8 @@ const Signup = ({setCurrentPage}) => {
   const navigate = useNavigate()
 
   const {updateUser} = useContext(UserContext)
+
+  const handleGoogleLogin=()=>{}
   const handleSubmit = async (e)=>{
     e.preventDefault();
     let profilePhotoUrl;
@@ -66,10 +68,10 @@ const Signup = ({setCurrentPage}) => {
   }
   return (
     <div>
-       <div className='w-[350px] md:w-[400px]  p-2'>
+       <div className='w-[350px] md:w-[400px]  md:p-2'>
         <h2 className='text-3xl font-semibold text-center text-gray-900 mb-2'>Create An Account</h2>
-        <p className='text-gray-600 mb-6 text-center'>Join us today by entering your details below</p>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+        <p className='text-gray-600 mb-4 text-center'>Join us today by entering your details below</p>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
            <ProfilePhotoPlaceholder image={profilePhoto} setImage={setProfilePhoto}/>
             <Input
             value={fullName}
@@ -96,7 +98,17 @@ const Signup = ({setCurrentPage}) => {
           >
             SignUp
           </button>
-          <p className='my-2'>Already have an account? <span className='text-purple-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("login")}>Login</span></p>
+             {/* Google Login Button */}
+           <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="flex cursor-pointer items-center justify-center gap-2 border border-gray-300 rounded-md py-2 px-4 hover:bg-gray-100 transition"
+          >
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
+            <span className="text-gray-700 font-medium">Continue with Google</span>
+          </button>
+      
+          <p className='my-2'>Already have an account? <span className='text-blue-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("login")}>Login</span></p>
         </form>
         
       </div>

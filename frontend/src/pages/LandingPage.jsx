@@ -175,7 +175,7 @@ const LandingPage = () => {
         },
         content:{
           position: 'absolute',
-          top: '45%', 
+          top: '50%', 
           left: '50%',
           transform : "translate(-50%, -50%)",
           borderRadius:20,
@@ -196,21 +196,7 @@ const LandingPage = () => {
             {currentPage === 'signup' && <SignUp setCurrentPage={setCurrentPage} />}
           </div>
           </Modal>
-    {/* <Modal 
-      
-      onClose={()=>{
-        setOpenAuthModal(false);
-      }}
-      hideHeader
-      >
-        {currentPage === "login" && (
-          <Login setCurrentPage={setCurrentPage}/>
-        )}
-        {currentPage === "singup" && (
-          <SignUp setCurrentPage={setCurrentPage}/>
-        )}
-      
-      </Modal> */}
+
     </>
   )
 }

@@ -14,13 +14,31 @@ const loginUser =async(req,res)=>{
         if(user){
             const auth=await bcrypt.compare(password,user.password);
             if(auth){
-                res.status(200).json({
+                //NEW CODE
+                const token = createToken(user._id)
+
+                res.cookie("token",token,{
+                    httpOnly:true,
+                    secure:process.env.NODE_ENV ==="production", // ensure HTTPS in prod
+                    sameSite:"Strict",
+                    maxAge:24 * 60 * 60 * 1000, //1 day
+                })
+
+                return res.status(200).json({
                 id:user._id,
                 fullName:user.fullName,
                 email:user.email,
                 profilePhotoUrluser:user.profilePhotoUrl,
-                token:createToken(user._id)
                 }) 
+
+                //OLD CODE
+                // res.status(200).json({
+                // id:user._id,
+                // fullName:user.fullName,
+                // email:user.email,
+                // profilePhotoUrluser:user.profilePhotoUrl,
+                // token:createToken(user._id)
+                // }) 
                 
             } 
             else{
@@ -37,14 +55,7 @@ const loginUser =async(req,res)=>{
     }
 }
 
-const logoutUser =(req,res)=>{
-    try{
 
-    }
-    catch(err){
-        res.status(500).json({message:"Server error",error:err.message})
-    }
-}
 const uploadImage = (req,res)=>{
     if(!req.file)
         res.status(400).json({message:"No file found"})
@@ -91,4 +102,4 @@ const register =async (req,res)=>{
     }
 }
 
-module.exports={loginUser,getProfile,logoutUser,uploadImage ,register}
+module.exports={loginUser,getProfile,uploadImage ,register}

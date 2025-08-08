@@ -13,6 +13,8 @@ const Login = ({setCurrentPage}) => {
   const {updateUser} = useContext(UserContext)
 
   const navigate =useNavigate();
+
+  const handleGoogleLogin=()=>{}
   const handleSubmit=async(e)=>{
     e.preventDefault()
     
@@ -45,7 +47,8 @@ const Login = ({setCurrentPage}) => {
           }
         }
     }
-     
+    
+
     
   }
   return (
@@ -72,8 +75,19 @@ const Login = ({setCurrentPage}) => {
         >
           Login
         </button>
-        <p className='my-2'>Don't have an account? <span className='text-purple-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("signup")}>Signup</span></p>
+         {/* Google Login Button */}
+           <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="flex cursor-pointer items-center justify-center gap-2 border border-gray-300 rounded-md py-2 px-4 hover:bg-gray-100 transition"
+          >
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
+            <span className="text-gray-700 font-medium">Continue with Google</span>
+          </button>
+          <p className='my-2'>Don't have an account? <span className='text-blue-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("signup")}>Signup</span></p>
+        
       </form>
+      
     </div>
   )
 }

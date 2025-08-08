@@ -8,6 +8,7 @@ const questionRoutes = require("./routes/questionRoutes")
 const sessionRoutes = require("./routes/sessionRoutes")
 const { requireAuth } = require("./middlewares/authMiddleware")
 const { generateInterviewQuestions, generateConceptExplanation } = require("./controllers/aiControllers")
+const cookieParser = require("cookie-parser")
 
 const app=express()
 
@@ -20,13 +21,14 @@ app.use(cors({
 }))
 
 
+
  //DATABASE CONNECTION
 connectDb()
 
 //MIDDLEWARES
 app.use(express.json())
 app.use("/uploads",express.static(path.join(__dirname,"uploads")))
-
+app.use(cookieParser())
 
 //ROUTES
 app.use("/api/auth",authRoutes)
