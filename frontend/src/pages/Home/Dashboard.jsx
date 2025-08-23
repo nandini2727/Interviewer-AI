@@ -93,12 +93,13 @@ const DashBoard = () => {
               transform:'translate(-50%,-50%)',
               borderRadius:20,
               height:'fit-content',
-              width:'fit-content'
+              width:'fit-content',
+              padding:0
             }
           }}
            >
             <div className='relative'>
-              <RxCross1 size={20} className='absolute top-2 right-2 cursor-pointer text-pink-600 hover:text-red-600' onClick={()=>setOpenCreateModal(false)}/>
+              <RxCross1 size={20} className='absolute top-2 right-2 m-3 cursor-pointer text-pink-600 hover:text-red-600' onClick={()=>setOpenCreateModal(false)}/>
               <CreateSessionForm/>
             </div>
             </Modal>
@@ -114,13 +115,14 @@ const DashBoard = () => {
             },
             content:{
               position:'absolute',
-              padding:10,
+              padding:0,
               top: '45%',
               left: '50%',
               transform:'translate(-50%,-50%)',
               borderRadius:20,
               height:'fit-content',
-              width:'fit-content'
+              width:'fit-content',
+              border:"0px"
             }
           }}
            >

@@ -27,13 +27,13 @@ const QuestionCard = ({
     }
   return (
     <>
- <div className="border border-gray-100/60 group  rounded-lg mb-4 overflow-hidden shadow-xl shadow-gray-100/70 p-4 bg-white group transition-all duration-300">
+<div className="border border-gray-100/60 dark:border-gray-700 group rounded-lg mb-4 overflow-hidden shadow-xl shadow-gray-100/70 dark:shadow-black/40 p-4 bg-white dark:bg-gray-900 group transition-all duration-300">
   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
     {/* Left: Q + Question Text */}
     <div className="flex items-start gap-3 w-full md:w-3/4">
-      <span className="text-lg font-semibold text-gray-600">Q</span>
+      <span className="text-lg font-semibold text-gray-600 dark:text-gray-300">Q</span>
       <h3
-        className="text-base font-medium text-gray-900 cursor-pointer"
+        className="text-base font-medium text-gray-900 dark:text-gray-100 cursor-pointer"
         onClick={toggleExpanded}
       >
         {question}
@@ -48,7 +48,7 @@ const QuestionCard = ({
     >
       {/* Pin / Unpin */}
       <button
-        className={`text-purple-700 hover:text-purple-900 cursor-pointer transition ${isPinned ? "flex":""}`}
+        className={`text-purple-700 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300 cursor-pointer transition ${isPinned ? "flex" : ""}`}
         onClick={onTogglePin}
       >
         {isPinned ? <LuPin /> : <LuPinOff />}
@@ -57,19 +57,23 @@ const QuestionCard = ({
       {/* Learn More */}
       <button
         onClick={() => {
-          setIsExpanded(true)
-          onLearnMore()
+          setIsExpanded(true);
+          onLearnMore();
         }}
-        className="flex items-center cursor-pointer gap-1 px-3 py-1 bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 text-sm text-gray-800 rounded-lg hover:shadow-md transition"
+        className="flex items-center cursor-pointer gap-1 px-3 py-1 
+                   bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 
+                   dark:from-purple-900/40 dark:via-blue-900/40 dark:to-green-900/40
+                   text-sm text-gray-800 dark:text-gray-200 rounded-lg 
+                   hover:shadow-md transition"
       >
-        <LuSparkles className="text-blue-500" />
+        <LuSparkles className="text-blue-500 dark:text-blue-400" />
         <span className="hidden md:inline font-medium">Learn More</span>
       </button>
     </div>
 
     {/* Chevron Expand */}
     <button
-      className="ml-auto md:ml-0 cursor-pointer text-gray-600"
+      className="ml-auto md:ml-0 cursor-pointer text-gray-600 dark:text-gray-400"
       onClick={toggleExpanded}
     >
       <LuChevronDown
@@ -88,14 +92,12 @@ const QuestionCard = ({
     }`}
     style={{ maxHeight: `${height}px` }}
   >
-    <div ref={contentRef} className="text-gray-700 text-sm">
-
-      <AiContentResponse content={answer}/>
+    <div ref={contentRef} className="text-gray-700 dark:text-gray-300 text-sm">
+      <AiContentResponse content={answer} />
     </div>
   </div>
 </div>
-
-    </>
+ </>
   )
 }
 

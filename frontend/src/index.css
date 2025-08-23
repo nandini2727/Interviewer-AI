@@ -4,11 +4,16 @@
 
 @layer utilities {
   .animate-gradient-x {
-    background: linear-gradient(90deg,  #bbf7d0, #bfdbfe, #e9d5ff);
+    background: linear-gradient(90deg, #bbf7d0, #bfdbfe, #e9d5ff);
     background-size: 400% 400%;
     animation: gradient-x 8s ease infinite;
   }
 
+  .dark .animate-gradient-x {
+    background: linear-gradient(90deg,  #38738f, #664aab, #883760); /* dark mode vibrant colors */
+     background-size: 400% 400%;
+    animation: gradient-x 8s ease infinite;
+  }
   @keyframes gradient-x {
     0% {
       background-position: 0% 50%;

@@ -115,8 +115,8 @@ const InterviewPrep = () => {
           lastUpdated = {sessionData?.updatedAt ? moment(sessionData.updatedAt).format("Do MMM YYYY") : ""}
         />
 
-        <div className='container mx-auto p-4 md:p-8'>
-          <h2 className='text-lg m-4 font-semibold '>Interview Q & A</h2>
+        <div className='container mx-auto dark:bg-gray-800 p-4 md:p-8'>
+          <h2 className='text-lg m-4 font-semibold dark:text-gray-100'>Interview Q & A</h2>
           <div className='grid grid-cols-4 gap-4 md:max-w-3/5'>
             <div
               className={`col-span-12 ${openLearnMoreDrawer ? "md:col-span-7" : "md:col-span-8 "}`}>
