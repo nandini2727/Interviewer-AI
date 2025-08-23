@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/Inputs/Input'
-import {isEmail,isStrongPassword} from "validator"
+import {isEmail} from "validator"
 import axiosInstance from '../../utils/axiosInstance'
 import { API_PATHS } from '../../utils/apiPaths'
-import { UserContext } from '../../context/useContext'
+import { UserContext } from '../../context/userContext'
+// import crypto from "crypto-browserify";
 
 const Login = ({setCurrentPage}) => {
   const [email,setEmail]=useState("")
@@ -14,7 +15,12 @@ const Login = ({setCurrentPage}) => {
 
   const navigate =useNavigate();
 
-  const handleGoogleLogin=()=>{}
+
+  const handleGoogleLogin = () => {
+  window.location.href = `${import.meta.env.VITE_BASE_URL}${API_PATHS.GOOGLE_AUTH.AUTH}`;
+};
+
+  
   const handleSubmit=async(e)=>{
     e.preventDefault()
     
@@ -30,13 +36,13 @@ const Login = ({setCurrentPage}) => {
         try {
           const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN,{
             email,password
-          })
-          const {token} = response.data
-          if(token){
-            localStorage.setItem("token",token)
-            updateUser(response.data)
-            navigate("/dashboard")
-          }
+          },{withCredentials:true})
+          // const {token} = response.data
+          // if(token){
+          //   localStorage.setItem("token",token)
+          updateUser(response.data)
+          navigate("/dashboard")
+          // }
           
         } catch (error) {
           if(error.response && error.response.data.message){
@@ -52,43 +58,79 @@ const Login = ({setCurrentPage}) => {
     
   }
   return (
-    <div className=' w-[300px] md:w-[400px] p-2'>
-      <h2 className='text-2xl md:text-3xl font-semibold text-center text-gray-900 mb-2'>Welcome Back</h2>
-      <p className='text-gray-600 mb-6 text-center'>Please enter your details to login</p>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+      <div className="w-[300px] md:w-[400px] dark:bg-gray-900  p-10">
+      <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-900 dark:text-white mb-2">
+        Welcome Back
+      </h2>
+      <p className="text-gray-600 dark:text-gray-300 mb-6 text-center">
+        Please enter your details to login
+      </p>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Input
           value={email}
-          onChange={({target})=>{setEmail(target.value)}}
+          onChange={({ target }) => {
+            setEmail(target.value);
+          }}
           label="Email Address"
           placeholder="susan@gmail.com"
-          type="text"/>
+          type="text"
+        />
         <Input
           value={password}
-          onChange={({target})=>{setPassword(target.value)}}
+          onChange={({ target }) => {
+            setPassword(target.value);
+          }}
           label="Password"
           placeholder="Min 8 characters"
-          type="password"/>
-          {errorMsg && <p className='my-2 text-red-600'>{errorMsg}</p>}
+          type="password"
+        />
+
+        {errorMsg && (
+          <p className="my-2 text-red-600 dark:text-red-400">{errorMsg}</p>
+        )}
+
+        {/* Login Button */}
         <button
           type="submit"
-          className=" w-[100%]  bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#1E293B] transition"
+          className="w-[100%] bg-[#0F172A] text-white font-semibold py-2 px-4 rounded-md 
+                    hover:bg-[#1E293B] transition 
+                    dark:bg-gray-300 dark:text-gray-900 cursor-pointer dark:hover:bg-gray-200"
         >
           Login
         </button>
-         {/* Google Login Button */}
-           <button
-            type="button"
-            onClick={handleGoogleLogin}
-            className="flex cursor-pointer items-center justify-center gap-2 border border-gray-300 rounded-md py-2 px-4 hover:bg-gray-100 transition"
+
+        {/* Google Login Button */}
+        <button
+          type="button"
+          onClick={handleGoogleLogin}
+          className="flex cursor-pointer items-center justify-center gap-2 
+                    border border-gray-300 rounded-md py-2 px-4 
+                    hover:bg-gray-100 transition 
+                    dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
+        >
+          <img
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+            alt="Google"
+            className="w-5 h-5"
+          />
+          <span className="text-gray-700 dark:text-gray-200 font-medium">
+            Continue with Google
+          </span>
+        </button>
+
+        <p className="my-2 text-gray-700 dark:text-gray-300">
+          Don't have an account?{" "}
+          <span
+            className="text-blue-800 dark:text-blue-400 font-semibold cursor-pointer underline"
+            onClick={() => setCurrentPage("signup")}
           >
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-            <span className="text-gray-700 font-medium">Continue with Google</span>
-          </button>
-          <p className='my-2'>Don't have an account? <span className='text-blue-800 font-semibold cursor-pointer underline' onClick={()=>setCurrentPage("signup")}>Signup</span></p>
-        
+            Sign Up
+          </span>
+        </p>
       </form>
-      
     </div>
+
   )
 }
 

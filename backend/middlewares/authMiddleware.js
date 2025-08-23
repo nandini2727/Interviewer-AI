@@ -5,10 +5,9 @@ const { ObjectId } = require("mongodb")
 
 const requireAuth =async (req,res,next)=>{
    try{
-        let token =req.headers.authorization;
-        if(token &&token.startsWith("Bearer")){
-            token =token.split(" ")[1]
-            
+        // let token =req.headers.authorization;
+        const token =req.cookies.token;
+        if(token){
             const decoded = jwt.verify(token , process.env.JWT_SECRET)
 
             const userId = new ObjectId(decoded.id);

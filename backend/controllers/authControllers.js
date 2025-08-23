@@ -20,7 +20,8 @@ const loginUser =async(req,res)=>{
                 res.cookie("token",token,{
                     httpOnly:true,
                     secure:process.env.NODE_ENV ==="production", // ensure HTTPS in prod
-                    sameSite:"Strict",
+                    sameSite:"lax",
+                    secure:false,
                     maxAge:24 * 60 * 60 * 1000, //1 day
                 })
 
@@ -75,6 +76,11 @@ const getProfile = async(req,res)=>{
         res.status(500).json({message:"Server error",error:err.message})
     }
 }
+
+const logoutUser = (req, res) => {
+  res.clearCookie("token").status(200).json({ message: "Logged out successfully" });
+};
+
 const register =async (req,res)=>{
     const {fullName,email,password,profilePhotoUrl} = req.body;
     try{
@@ -89,12 +95,20 @@ const register =async (req,res)=>{
 
         //CRAETE NEW USER
         const user = await User.create({fullName,email,password:hashPassword,profilePhotoUrl})
-        res.status(200).json({
+        //UPDATED CODE
+        const token = createToken(user._id)
+        res.cookie("token",token,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Strict",
+            maxAge: 24 * 60 * 60 * 1000,
+        })
+        return res.status(200).json({
             fullName:user.fullName,
             email:user.email,
             password:user.password,
             profilePhotoUrluser:user.profilePhotoUrl,
-            token:createToken(user._id)
+            
         })
     }
     catch(err){
@@ -102,4 +116,4 @@ const register =async (req,res)=>{
     }
 }
 
-module.exports={loginUser,getProfile,uploadImage ,register}
+module.exports={loginUser,getProfile,uploadImage ,logoutUser,register}

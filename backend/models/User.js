@@ -15,7 +15,7 @@ const userSchema=new Schema({
     },
     password:{
         type:String,
-        required:[true,"Please enter an password"]
+        // required:[true,"Please enter an password"]
     },
     profilePhotoUrl:{
         type:String,

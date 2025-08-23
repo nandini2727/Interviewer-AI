@@ -1,22 +1,22 @@
 import axios from "axios"
-import { BASE_URL } from "./apiPaths"
 
 const axiosInstance = axios.create({
-    baseURL:BASE_URL,
+    baseURL:import.meta.env.VITE_BASE_URL,
     timeout:80000, //80 SEC
     headers:{
         "Content-Type":"application/json",
         Accept:"application/json",
-    }
+    },
+    withCredentials: true, 
 })
 
 //REQUEST INTERCEPTOR
 
 axiosInstance.interceptors.request.use(
     (config) =>{
-        const accessToken =localStorage.getItem("token")
-        if(accessToken)
-            config.headers.Authorization = `Bearer ${accessToken}`
+        // const accessToken =localStorage.getItem("token")
+        // if(accessToken)
+        //     config.headers.Authorization = `Bearer ${accessToken}`
         return config
     },
     (error)=>{
@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
     },
     (error)=>{
         if(error.response){
-            if(error.response.status ===401){
+            if(error.response.status ===401&& window.location.pathname !== "/"){
                 window.location.href = "/"
             }
             else if(error.response.status === 500){

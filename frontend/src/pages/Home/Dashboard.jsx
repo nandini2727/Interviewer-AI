@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DashboardLayout from '../../components/Layouts/DashboardLayout'
-import { CARD_BG } from '../../utils/data'
+import { CARD_BG, CARD_BG_DARK } from '../../utils/data'
 import toast from "react-hot-toast"
 import Modal from "react-modal"
 import { LuPlus } from 'react-icons/lu'
@@ -12,9 +12,12 @@ import SummaryCard from '../../components/Cards/SummaryCard'
 import { RxCross1 } from 'react-icons/rx'
 import CreateSessionForm from './CreateSessionForm'
 import DeleteAlertContent from './DeleteAlertContent'
+import EmptyDashBoard from './EmptyDashBoard'
+import { ThemeContext } from '../../context/themeContext'
 
 const DashBoard = () => {
   const navigate = useNavigate()
+  const {theme} = useContext(ThemeContext)
   const [openCreateModal,setOpenCreateModal] =useState(false)
   const [sessions,setSessions] = useState([])
   const [openDeleteModal,setOpenDeleteModal] =  useState({
@@ -45,13 +48,14 @@ const DashBoard = () => {
     fetchAllSessions()
   },[])
   return (
-    <div>
-      <DashboardLayout>
-     <div className=" p-8 md:p-11 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className='dark:bg-gray-900 h-screen'>
+      <DashboardLayout >
+     {sessions?.length>0 ? 
+          <div className=" p-8 md:p-11  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {sessions?.map((data,index)=>(
           <SummaryCard
             key = {data?._id}
-            color = {CARD_BG[index % CARD_BG.length]}
+            color = {theme=="light"?CARD_BG[index % CARD_BG.length]:CARD_BG_DARK[index % CARD_BG_DARK.length]}
             role = {data?.role || ""}
             topicsToFocus = {data?.topicsToFocus || "-"}
             experienceLevel = {data?.experienceLevel || "-"}
@@ -64,6 +68,7 @@ const DashBoard = () => {
 
         ))}
       </div>
+     :<EmptyDashBoard/>}
 
       <button
         onClick={() => setOpenCreateModal(true)}

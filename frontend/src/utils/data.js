@@ -10,3 +10,17 @@ export const CARD_BG = [
   { id: 9, bgcolor: 'linear-gradient(135deg, #fffde1 0%, #fff9f0 100%)' },
   { id: 10, bgcolor: 'linear-gradient(135deg, #dce4ff 0%, #f3f6ff 100%)' }
 ];
+
+export const CARD_BG_DARK = [
+  { id: 1, bgcolor: 'linear-gradient(135deg, #1b2d36 0%, #2c5364 100%)' }, // teal/blue
+  { id: 2, bgcolor: 'linear-gradient(135deg, #3a1b25 0%, #732642 100%)' }, // deep rose
+  { id: 3, bgcolor: 'linear-gradient(135deg, #2a1b3f 0%, #553285 100%)' }, // purple/indigo
+  { id: 4, bgcolor: 'linear-gradient(135deg, #16314a 0%, #375a7f 100%)' }, // navy/blue
+  { id: 5, bgcolor: 'linear-gradient(135deg, #4b2c18 0%, #a0522d 100%)' }, // warm amber
+  { id: 6, bgcolor: 'linear-gradient(135deg, #1e4044 0%, #2e8b92 100%)' }, // teal/cyan
+  { id: 7, bgcolor: 'linear-gradient(135deg, #234528 0%, #3c8d47 100%)' }, // forest green
+  { id: 8, bgcolor: 'linear-gradient(135deg, #402153 0%, #7a3fa6 100%)' }, // violet
+  { id: 9, bgcolor: 'linear-gradient(135deg, #3e3b1a 0%, #9c9832 100%)' }, // muted yellow
+  { id: 10, bgcolor: 'linear-gradient(135deg, #2d3245 0%, #4c5c7f 100%)' } // cool gray/blue
+];
+

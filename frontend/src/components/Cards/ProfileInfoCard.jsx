@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {useNavigate} from "react-router-dom"
-import { UserContext } from '../../context/useContext'
+import { UserContext } from '../../context/userContext'
 import NoProfile from "../../assets/Default Profile.jpg"
 
 const ProfileInfoCard = () => {
@@ -18,6 +18,8 @@ const [photoUrl, setPhotoUrl] = useState(NoProfile);
 useEffect(() => {
   // console.log(user)
   if (user?.profilePhotoUrl || user?.profilePhotoUrluser ) {
+    console.log(user?.profilePhotoUrl)
+    console.log(user?.profilePhotoUrluser)
     setPhotoUrl(user?.profilePhotoUrl || user?.profilePhotoUrluser );
   } else {
     setPhotoUrl(NoProfile);
@@ -32,7 +34,7 @@ useEffect(() => {
       
       <img key={user?.profilePhotoUrl || "default"}
   src={photoUrl} alt='' className='w-11 h-11 bg-gray-300 rounded-full mr-3'/>
-      <div className='text-[15px] flex flex-col  text-black font-bold leading-3'>
+      <div className='text-[15px] flex flex-col dark:text-white text-black font-bold leading-3'>
         {user.fullName|| ""}
 
       <button className='text-amber-600 text-sm font-semibold cursor-pointer hover:underline' onClick={handleLogout}>Logout</button>

@@ -10,13 +10,13 @@ const Input=( {value,onChange,label,placeholder,type})=>{
     return(
         <div>
             <div className="space-y-2">
-                <label className="block text-[15px] font-medium text-gray-700">{label}</label>
+                <label className="block text-[15px] font-medium dark:text-gray-200  text-gray-700">{label}</label>
                 <div className="relative">
                     <input placeholder={placeholder}
                         value={value}
                         onChange={(e)=> onChange(e)}
                         type={type==="password" ? (showPassword? "text" : "password" ):type}
-                        className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-colors duration-200"
+                        className="w-full text-sm px-3 py-2 border dark:text-white dark:bg-gray-800 border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-slate-800 focus:border-transparent transition-colors duration-200"
                         />
                         {type ==="password" && 
                         <>
@@ -24,12 +24,12 @@ const Input=( {value,onChange,label,placeholder,type})=>{
                             showPassword?
                         <FaRegEye
                             size={22}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                            className="absolute right-3 cursor-pointer top-1/2 transform -translate-y-1/2 dark:text-gray-300 dark:hover:text-gray-200 text-gray-500 hover:text-gray-700 transition-colors duration-200"
                             onClick={toggleShowPassword}
                         />:
                         <FaRegEyeSlash
                             size={22}
-                             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200"
+                             className="absolute right-3 cursor-pointer top-1/2 transform -translate-y-1/2 dark:text-gray-300 dark:hover:text-gray-200  text-gray-500 hover:text-gray-700 transition-colors duration-200"
                             onClick={toggleShowPassword}
                         />
                         }

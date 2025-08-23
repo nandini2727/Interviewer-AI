@@ -1,11 +1,14 @@
-export const BASE_URL = "http://localhost:8000"
 
 export const API_PATHS ={
 
     AUTH:{
         REGISTER:"/api/auth/register",
         LOGIN:"/api/auth/login",
+        LOGOUT:"api/auth/logout",
         GET_PROFILE:"/api/auth/getProfile",
+    },
+    GOOGLE_AUTH:{
+        AUTH:"/api/auth/google",
     },
     IMAGE:{
         UPLOAD_IMAGE:"/api/auth/upload-image",

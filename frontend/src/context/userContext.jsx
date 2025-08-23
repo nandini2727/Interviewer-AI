@@ -5,44 +5,44 @@ import { API_PATHS } from "../utils/apiPaths";
 export const UserContext = createContext();
 
 const UserProvider = ({children}) =>{
-
+    
     const [user,setUser]= useState(null)
     const [loading , setLoading] =useState(true)
 
     useEffect(()=>{
         if (user) return
-
-        const accessToken = localStorage.getItem("token")
-        if(!accessToken){
-            setLoading(false)
-            return
-        }
-
         const fetchUser = async () =>{
             try{
-                const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE)
+                const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE,{
+                    withCredentials:true
+                }
+                )
                 setUser(response.data)
                 
             }
             catch(error){
                 console.error("User not authenticated",error)
-                clearUser()
+                // clearUser()
             }finally{
                 setLoading(false)
                 
             }
         }
         fetchUser();
-        
-    },[])
+    })
     const updateUser = (userData) =>{
         setUser(userData)
-        localStorage.setItem("token",userData.token)
+        // localStorage.setItem("token",userData.token)
         setLoading(false)
     }
-    const clearUser =()=>{
+    const clearUser =async ()=>{
         setUser(null)
-        localStorage.removeItem("token")
+        // localStorage.removeItem("token")
+        try {
+            await axiosInstance.post(API_PATHS.AUTH.LOGOUT); // clear cookie from backend
+        } catch (error) {
+        console.error("Error logging out", error);
+        }
     }
     return (
         <UserContext.Provider value ={{user,loading, updateUser,clearUser}}>

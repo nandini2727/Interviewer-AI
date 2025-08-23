@@ -1,23 +1,33 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy
 const passport =require("passport")
+const User = require("../models/user.js");
+// import jwt from "jsonwebtoken";
+
 
 passport.use(
-    new GoogleStrategy(
-        {
-            clientID:process.env.GOOGLE_CLIENT_ID,
-            clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL:"/auth/google/callback",
-            scope:["profile","email"],
-        },
-        function(accessToken,refreshToken,profile,callback){
-            callback(null,profile)
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${process.env.SERVER_URL}api/auth/google/callback`,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Find or create user
+        
+        let user = await User.findOne({ email: profile.emails[0].value });
+        if (!user) {
+          user = await User.create({
+            fullName: profile.displayName,
+            email: profile.emails[0].value,
+            profilePhotoUrl: profile.photos[0].value,
+          });
         }
-    )
-)
-passport.serializeUser((user,done)=>{
-    done(null,user)
-})
+        return done(null, user); // ✅ user goes to callback
+      } catch (err) {
+        return done(err, null);
+      }
+    }
+  )
+);
 
-passport.deserializeUser((user,done)=>{
-    done(null,user)
-})

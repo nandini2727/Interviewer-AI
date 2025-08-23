@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer utilities {
   .animate-gradient-x {
     background: linear-gradient(90deg,  #bbf7d0, #bfdbfe, #e9d5ff);
