@@ -14,17 +14,16 @@ const ProfileInfoCard = () => {
   }
   
 const [photoUrl, setPhotoUrl] = useState(NoProfile);
+const [displayName, setDisplayName] = useState("");
 
 useEffect(() => {
-  // console.log(user)
   if (user?.profilePhotoUrl || user?.profilePhotoUrluser ) {
-    console.log(user?.profilePhotoUrl)
-    console.log(user?.profilePhotoUrluser)
     setPhotoUrl(user?.profilePhotoUrl || user?.profilePhotoUrluser );
   } else {
     setPhotoUrl(NoProfile);
   }
 }, [user?.profilePhotoUrl]);
+
 
   return (
     <>
@@ -35,7 +34,14 @@ useEffect(() => {
       <img key={user?.profilePhotoUrl || "default"}
   src={photoUrl} alt='' className='w-11 h-11 bg-gray-300 rounded-full mr-3'/>
       <div className='text-[15px] flex flex-col dark:text-white text-black font-bold leading-3'>
-        {user.fullName|| ""}
+      {/* First name on mobile */}
+      <span className="block md:hidden">
+        {user.fullName ? user.fullName.split(' ')[0] : ""}
+      </span>
+      {/* Full name on md+ screens */}
+      <span className="hidden md:block">
+        {user.fullName || ""}
+      </span>
 
       <button className='text-amber-600 text-sm font-semibold cursor-pointer hover:underline' onClick={handleLogout}>Logout</button>
             </div>

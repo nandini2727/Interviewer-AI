@@ -58,7 +58,7 @@ const Login = ({setCurrentPage}) => {
     
   }
   return (
-      <div className="w-[300px] md:w-[400px] dark:bg-gray-900  p-10">
+      <div className="w-[300px] md:w-[400px] dark:bg-gray-900 p-8 md:p-10">
       <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-900 dark:text-white mb-2">
         Welcome Back
       </h2>

@@ -12,6 +12,7 @@ import { FcFaq, FcSearch, FcViewDetails } from "react-icons/fc";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import { BsGraphUpArrow } from "react-icons/bs";
 import HERO_IMG_MOBILE from "../assets/dashboard_mobile.png"
+import Footer from "../components/Layouts/Footer";
 
 const LandingPage = () => {
   const {user} = useContext(UserContext)
@@ -122,10 +123,8 @@ const LandingPage = () => {
             </div>
         </div>
     </div>
-</section>
-  <footer className="w-full bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-white text-center font-bold py-4 md:py-7 text-sm">
-    Made with <span className="text-red-500">❤️</span> by Nandini
-  </footer>
+      </section>
+      <Footer/>
     <Modal
       isOpen={openAuthModal}
       onRequestClose = {()=>{

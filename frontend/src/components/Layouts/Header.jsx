@@ -22,7 +22,7 @@ const {theme,toggleTheme}=useContext(ThemeContext)
           <div className="flex-shrink-0">
             <Link to="/" className="flex rounded outline-none cursor-pointer">
               <img
-                className="w-45  h-8"
+                className={theme=="light"?"w-45 h-8":"w-45 h-7"}
                 src={theme=="light"?Logo:DarkLogo}
                 alt="Logo"
               />

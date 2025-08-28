@@ -2,9 +2,9 @@ import React from 'react'
 
 const DeleteAlertContent = ({content,onDelete,title}) => {
   return (
-  <div className="bg-white   p-6 max-w-md w-full">
-  <h4 className="text-lg font-semibold text-gray-800 mb-3">{title}</h4>
-  <div className="text-sm text-gray-600 mb-6">{content}</div>
+  <div className="bg-white   p-6 max-w-md w-full dark:bg-gray-800">
+  <h4 className="text-lg font-semibold dark:text-gray-100 text-gray-800 mb-3">{title}</h4>
+  <div className="text-sm dark:text-gray-300 text-gray-600 mb-6">{content}</div>
   <div className="flex justify-end space-x-3">
     <button
       type="button"

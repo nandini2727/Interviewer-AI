@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useParams} from "react-router-dom"
 import {AnimatePresence, motion} from "framer-motion"
 import moment  from "moment"
@@ -14,17 +14,18 @@ import Drawer from '../../components/Drawer'
 import { ClipLoader } from 'react-spinners'
 import AiResponsePreview from './components/AiResponsePreview'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { ThemeContext } from '../../context/themeContext'
 
 const InterviewPrep = () => {
   const {id :sessionId}  = useParams()
   const [sessionData, setSessionData] = useState(null)
   const [errorMsg, setErrorMsg] =  useState(null)
-
   const [openLearnMoreDrawer,setOpenLearnMoreDrawer] = useState(false)
   const [explanation,setExplanation]= useState(null)
-
   const [isLoading, setIsLoading] = useState(false)
   const [isUpdateLoader,setIsUpdateLoader] =useState(false)
+
+  const {theme} =useContext(ThemeContext)
 
   const fetchSessionDataById =async() =>{
     try {
@@ -168,7 +169,7 @@ const InterviewPrep = () => {
 
                   })|| (
                     <div className='flex flex-col gap-3 '>
-                      <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
+                      <SkeletonTheme baseColor={theme=='light'? "#e0e0e0": "#2d2d2d"} highlightColor={theme=='light'?"#f5f5f5":"#3d3d3d"}>
                         <Skeleton containerClassName="flex-1" height={50} count={6} style={{"line-height":3}} width="w-3/4"/>
                         
                       </SkeletonTheme>
@@ -191,7 +192,7 @@ const InterviewPrep = () => {
             )}
             {isLoading && (
             <div className='flex flex-col gap-3 '>
-              <SkeletonTheme baseColor="#e0e0e0" highlightColor="#f5f5f5">
+              <SkeletonTheme baseColor={theme=='light'? "#e0e0e0": "#7a7a7a"} highlightColor={theme=='light'?"#f5f5f5":"#7a7a7a" }>
                 <Skeleton containerClassName="flex-1" height={22} width={"50%"}/>
                 <Skeleton containerClassName="flex-1" height={18} count={8}/>
                 <Skeleton containerClassName="flex-1" height={18} width={"35%"}/>
